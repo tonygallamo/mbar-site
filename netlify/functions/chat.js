@@ -58,6 +58,17 @@ HOW TO RESPOND:
     });
 
     const data = await response.json();
+    console.log('API response status:', response.status);
+    console.log('API response:', JSON.stringify(data).slice(0, 200));
+
+    if (!response.ok) {
+      console.error('API error:', JSON.stringify(data));
+      return {
+        statusCode: 200,
+        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+        body: JSON.stringify({ reply: `API Error ${response.status}: ${data.error?.message || 'Unknown error'}` })
+      };
+    }
 
     return {
       statusCode: 200,
@@ -69,9 +80,11 @@ HOW TO RESPOND:
     };
 
   } catch (err) {
+    console.error('Function error:', err.message);
     return {
-      statusCode: 500,
-      body: JSON.stringify({ error: 'Something went wrong. Please call us at 843-732-4338.' })
+      statusCode: 200,
+      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+      body: JSON.stringify({ reply: `Error: ${err.message}` })
     };
   }
 };
