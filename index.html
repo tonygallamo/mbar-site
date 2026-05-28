@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Myrtle Beach Auto Rescue | Fast Help. Local Care.</title>
+<meta name="description" content="Myrtle Beach Auto Rescue provides 24/7 roadside assistance, preventative maintenance, advanced diagnostics, and European auto repair in Myrtle Beach, SC. Call 843-732-4338.">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="apple-touch-icon" href="favicon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #08122a;
+    --navy-mid: #0e1e3d;
+    --navy-light: #152850;
+    --green: #00d45a;
+    --green-dark: #00a846;
+    --green-glow: rgba(0, 212, 90, 0.15);
+    --white: #ffffff;
+    --gray: #8fa3c4;
+    --card-bg: #0d1d38;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ── STICKY TOP BAR ── */
+  .topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(8, 18, 42, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0, 212, 90, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 24px;
+  }
+
+  .topbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .topbar-icon {
+    width: 38px;
+    height: 38px;
+    background: var(--green);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .topbar-icon svg { width: 22px; height: 22px; }
+
+  .topbar-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--white);
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+  }
+
+  .topbar-name span { color: var(--green); }
+
+  .topbar-call {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--green);
+    color: var(--navy);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.04em;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .topbar-call:hover { background: var(--green-dark); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 24px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 200px;
+    background: linear-gradient(to bottom, transparent, var(--navy));
+    pointer-events: none;
+  }
+
+  /* Animated radial glow */
+  .hero-glow {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,212,90,0.12) 0%, transparent 70%);
+    animation: pulse-glow 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+  }
+
+  /* Grid lines background */
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,212,90,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,90,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0,212,90,0.1);
+    border: 1px solid rgba(0,212,90,0.3);
+    color: var(--green);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 28px;
+    position: relative;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .badge-dot {
+    width: 7px; height: 7px;
+    background: var(--green);
+    border-radius: 50%;
+    animation: blink 1.5s ease-in-out infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .hero-logo {
+    width: 110px;
+    height: 110px;
+    background: var(--green);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 32px;
+    box-shadow: 0 0 60px rgba(0,212,90,0.35);
+    position: relative;
+    animation: fadeUp 0.7s ease 0.1s both;
+  }
+
+  .hero-logo svg { width: 64px; height: 64px; }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 10vw, 96px);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    color: var(--white);
+    position: relative;
+    animation: fadeUp 0.7s ease 0.2s both;
+    margin-bottom: 8px;
+  }
+
+  h1 .green { color: var(--green); }
+
+  .hero-tagline {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--gray);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    position: relative;
+    animation: fadeUp 0.7s ease 0.3s both;
+  }
+
+  .hero-desc {
+    max-width: 500px;
+    color: var(--gray);
+    font-size: 16px;
+    margin: 0 auto 40px;
+    position: relative;
+    animation: fadeUp 0.7s ease 0.35s both;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+    animation: fadeUp 0.7s ease 0.4s both;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--green);
+    color: var(--navy);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 0.06em;
+    padding: 16px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s;
+    box-shadow: 0 4px 24px rgba(0,212,90,0.3);
+  }
+
+  .btn-primary:hover {
+    background: var(--green-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0,212,90,0.4);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    color: var(--white);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 0.06em;
+    padding: 16px 32px;
+    border-radius: 8px;
+    border: 1.5px solid rgba(255,255,255,0.25);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--green);
+    color: var(--green);
+    transform: translateY(-2px);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 64px;
+    position: relative;
+    animation: fadeUp 0.7s ease 0.5s both;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 40px;
+    color: var(--green);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--gray);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  .stat-divider {
+    width: 1px;
+    background: rgba(255,255,255,0.1);
+    align-self: stretch;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 80px 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .section-label {
+    display: inline-block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 12px;
+  }
+
+  h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 6vw, 60px);
+    letter-spacing: 0.02em;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .section-sub {
+    color: var(--gray);
+    font-size: 16px;
+    max-width: 520px;
+    margin-bottom: 52px;
+  }
+
+  /* ── SERVICES GRID ── */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+  }
+
+  .service-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px;
+    padding: 28px;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--green);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .service-card:hover {
+    border-color: rgba(0,212,90,0.25);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  }
+
+  .service-card:hover::before { transform: scaleX(1); }
+
+  .service-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--green-glow);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    font-size: 22px;
+  }
+
+  .service-card h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 0.03em;
+    margin-bottom: 8px;
+  }
+
+  .service-card p {
+    font-size: 14px;
+    color: var(--gray);
+    line-height: 1.6;
+  }
+
+  .service-card .badge-eu {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(0,212,90,0.1);
+    border: 1px solid rgba(0,212,90,0.3);
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 100px;
+    margin-top: 10px;
+  }
+
+  /* ── WHY US ── */
+  .why-section {
+    background: var(--navy-mid);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 80px 24px;
+  }
+
+  .why-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 32px;
+    margin-top: 52px;
+  }
+
+  .why-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .why-icon {
+    font-size: 28px;
+    width: 56px;
+    height: 56px;
+    background: var(--green-glow);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .why-item h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 0.04em;
+  }
+
+  .why-item p {
+    font-size: 14px;
+    color: var(--gray);
+  }
+
+  /* ── EUROPEAN BANNER ── */
+  .eu-banner {
+    background: linear-gradient(135deg, var(--navy-light) 0%, #0a2240 100%);
+    border: 1px solid rgba(0,212,90,0.2);
+    border-radius: 16px;
+    padding: 48px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-bottom: 0;
+  }
+
+  .eu-banner-text h2 { margin-bottom: 12px; }
+  .eu-banner-text p { color: var(--gray); max-width: 480px; }
+
+  .eu-brands {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .eu-brand {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--white);
+  }
+
+  /* ── BOOK SECTION ── */
+  .book-section {
+    background: var(--navy);
+    padding: 80px 24px;
+  }
+
+  .book-inner {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .book-inner h2 { margin-bottom: 12px; }
+  .book-inner .section-sub { margin: 0 auto 40px; }
+
+  .book-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .book-option {
+    background: var(--card-bg);
+    border: 1.5px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 28px 20px;
+    text-decoration: none;
+    color: var(--white);
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .book-option:hover {
+    border-color: var(--green);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+  }
+
+  .book-option .opt-icon { font-size: 32px; }
+
+  .book-option h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 0.04em;
+  }
+
+  .book-option p { font-size: 13px; color: var(--gray); }
+
+  .book-option.primary {
+    border-color: var(--green);
+    background: linear-gradient(135deg, rgba(0,212,90,0.12), rgba(0,168,70,0.06));
+  }
+
+  .calendly-placeholder {
+    background: var(--card-bg);
+    border: 2px dashed rgba(0,212,90,0.3);
+    border-radius: 12px;
+    padding: 48px 32px;
+    text-align: center;
+    color: var(--gray);
+  }
+
+  .calendly-placeholder h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+
+  .calendly-placeholder p { font-size: 14px; margin-bottom: 20px; }
+
+  .calendly-placeholder .calendly-note {
+    display: inline-block;
+    background: rgba(0,212,90,0.1);
+    border: 1px solid rgba(0,212,90,0.25);
+    color: var(--green);
+    font-size: 12px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── CONTACT STRIP ── */
+  .contact-strip {
+    background: var(--navy-mid);
+    border-top: 1px solid rgba(0,212,90,0.15);
+    padding: 64px 24px;
+  }
+
+  .contact-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 32px;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .contact-item-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--green-glow);
+    border: 1px solid rgba(0,212,90,0.2);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .contact-item-text .label {
+    font-size: 11px;
+    color: var(--gray);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .contact-item-text a,
+  .contact-item-text p {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    transition: color 0.2s;
+  }
+
+  .contact-item-text a:hover { color: var(--green); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #050d1e;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding: 28px 24px;
+    text-align: center;
+  }
+
+  footer p { font-size: 13px; color: rgba(255,255,255,0.3); }
+  footer a { color: var(--green); text-decoration: none; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 600px) {
+    .topbar-call span.call-text { display: none; }
+    .book-options { grid-template-columns: 1fr; }
+    .stat-divider { display: none; }
+    .eu-banner { padding: 32px 24px; }
+    .hero-stats { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="topbar">
+  <a class="topbar-logo" href="#">
+    <div class="topbar-icon">
+      <svg viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="30" width="90" height="38" rx="10" fill="#08122a"/>
+        <path d="M15 30 L25 10 H75 L85 30" stroke="#08122a" stroke-width="3" fill="#08122a"/>
+        <rect x="5" y="30" width="90" height="38" rx="10" stroke="#08122a" stroke-width="2" fill="none"/>
+        <circle cx="25" cy="68" r="10" fill="#08122a"/>
+        <circle cx="75" cy="68" r="10" fill="#08122a"/>
+        <rect x="12" y="42" width="25" height="16" rx="3" fill="#00d45a" opacity="0.5"/>
+        <rect x="63" y="42" width="25" height="16" rx="3" fill="#00d45a" opacity="0.5"/>
+        <rect x="38" y="42" width="24" height="16" rx="3" fill="#00d45a" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="topbar-name">MYRTLE BEACH<br><span>AUTO RESCUE</span></div>
+  </a>
+  <a class="topbar-call" href="tel:8437324338">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.5 19.79 19.79 0 01.01 2.82 2 2 0 012 .67h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.49a16 16 0 006.29 6.29l1.19-1.19a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+    <span class="call-text">843-732-4338</span>
+    <span style="display:none" class="call-text-hidden">CALL NOW</span>
+  </a>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+
+  <div class="hero-badge">
+    <div class="badge-dot"></div>
+    Available 24/7 — Always Open
+  </div>
+
+  <div class="hero-logo">
+    <svg viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 35 L22 10 H78 L90 35 H10Z" fill="#08122a"/>
+      <rect x="5" y="33" width="90" height="36" rx="10" fill="#08122a"/>
+      <circle cx="27" cy="69" r="11" fill="#08122a" stroke="#08122a" stroke-width="2"/>
+      <circle cx="73" cy="69" r="11" fill="#08122a" stroke="#08122a" stroke-width="2"/>
+      <rect x="10" y="44" width="22" height="14" rx="3" fill="#00d45a" opacity="0.6"/>
+      <rect x="68" y="44" width="22" height="14" rx="3" fill="#00d45a" opacity="0.6"/>
+      <rect x="36" y="44" width="28" height="14" rx="3" fill="#00d45a"/>
+    </svg>
+  </div>
+
+  <h1>MYRTLE BEACH<br><span class="green">AUTO RESCUE</span></h1>
+  <p class="hero-tagline">Fast Help. Local Care.</p>
+  <p class="hero-desc">Mobile auto repair & roadside assistance serving Myrtle Beach, SC and surrounding areas. We come to you — from the shoulder to your driveway.</p>
+
+  <div class="hero-buttons">
+    <a class="btn-primary" href="tel:8437324338">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.5 19.79 19.79 0 01.01 2.82 2 2 0 012 .67h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.49a16 16 0 006.29 6.29l1.19-1.19a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      CALL NOW
+    </a>
+    <a class="btn-secondary" href="#book">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      BOOK ONLINE
+    </a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-number">24/7</div>
+      <div class="stat-label">Always Available</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-number">100%</div>
+      <div class="stat-label">Recommended</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-number">$50+</div>
+      <div class="stat-label">Starting From</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-number">MB</div>
+      <div class="stat-label">Local & Trusted</div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label">What We Do</div>
+  <h2>OUR SERVICES</h2>
+  <p class="section-sub">From warning lights to breakdowns — we help you fix it before it fails. Mobile service means we come to you.</p>
+
+  <div class="services-grid">
+
+    <div class="service-card">
+      <div class="service-icon">🚨</div>
+      <h3>Emergency Roadside Assistance</h3>
+      <p>Battery jump-starts, flat tire changes, lockout assistance, fuel delivery, winching and extrication. We're on our way.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🔧</div>
+      <h3>Preventative Maintenance</h3>
+      <p>Oil changes, fluid checks, filter replacements, inspections, and tune-ups to keep your vehicle running strong before problems start.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🔬</div>
+      <h3>Advanced Diagnostics</h3>
+      <p>Dealer-level diagnostics brought right to your driveway. We pinpoint complex engine faults fast so you know exactly what's going on.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🏎️</div>
+      <h3>European Auto Repair</h3>
+      <p>Specialized diagnosis and repair for European vehicles. BMW, Audi, Mercedes, Porsche, Bentley, Maserati, Ferrari, and more.</p>
+      <span class="badge-eu">⭐ European Specialists</span>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🛑</div>
+      <h3>Brake Repair</h3>
+      <p>Inspection, servicing, and repair of all brake components — ABS, brake pads, rotors, drums, calipers, and brake lines.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">❄️</div>
+      <h3>AC System Repair</h3>
+      <p>Recharge Freon, compressor, condenser, evaporator repair — get your AC blowing cold again before the Myrtle Beach heat hits.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🌡️</div>
+      <h3>Cooling System Repair</h3>
+      <p>Radiator, coolant hoses, water pump, and heater core inspection and repair to keep your engine from overheating.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🏗️</div>
+      <h3>Suspension System Repair</h3>
+      <p>Shocks, struts, ball joints, sway bars, and more. Restore your ride quality and keep your vehicle handling safely.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHY US -->
+<div class="why-section">
+  <div class="why-inner">
+    <div class="section-label">Why Choose MBAR</div>
+    <h2>FAST. RELIABLE. LOCAL.</h2>
+    <div class="why-grid">
+      <div class="why-item">
+        <div class="why-icon">⚡</div>
+        <h3>Fast Response</h3>
+        <p>We know when you're stuck, every minute counts. We move fast and keep you updated.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">📍</div>
+        <h3>We Come To You</h3>
+        <p>Mobile service means no tow truck needed. We show up at your location — home, work, or roadside.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">🛡️</div>
+        <h3>Trusted & Reliable</h3>
+        <p>100% recommended by our customers. Professional service you can count on, every time.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">🌙</div>
+        <h3>Always Open</h3>
+        <p>Emergencies don't keep business hours. We're available 24/7, 365 days a year.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EUROPEAN BANNER -->
+<section>
+  <div class="eu-banner">
+    <div class="eu-banner-text">
+      <div class="section-label">Specialist Service</div>
+      <h2>EUROPEAN CAR EXPERTS</h2>
+      <p>Luxury vehicles deserve more than guesswork. We specialize in European diagnostics, repairs, and maintenance with the professionalism your vehicle deserves.</p>
+      <div class="eu-brands">
+        <span class="eu-brand">BMW</span>
+        <span class="eu-brand">Audi</span>
+        <span class="eu-brand">Mercedes</span>
+        <span class="eu-brand">Porsche</span>
+        <span class="eu-brand">Volkswagen</span>
+        <span class="eu-brand">Bentley</span>
+        <span class="eu-brand">Maserati</span>
+        <span class="eu-brand">Rolls Royce</span>
+        <span class="eu-brand">Ferrari</span>
+        <span class="eu-brand">Lamborghini</span>
+        <span class="eu-brand">Volvo</span>
+        <span class="eu-brand">MINI</span>
+      </div>
+    </div>
+    <a class="btn-primary" href="tel:8437324338" style="flex-shrink:0;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.5 19.79 19.79 0 01.01 2.82 2 2 0 012 .67h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.49a16 16 0 006.29 6.29l1.19-1.19a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      CALL NOW
+    </a>
+  </div>
+</section>
+
+<!-- BOOK -->
+<div class="book-section" id="book">
+  <div class="book-inner">
+    <div class="section-label">Schedule Service</div>
+    <h2>BOOK AN APPOINTMENT</h2>
+    <p class="section-sub">Choose how you'd like to reach us — call for immediate help or book online for scheduled service.</p>
+
+    <div class="book-options">
+      <a class="book-option primary" href="tel:8437324338">
+        <div class="opt-icon">📞</div>
+        <h3>Call or Text</h3>
+        <p style="color:var(--green); font-weight:700; font-size:18px; font-family:'Barlow Condensed',sans-serif; letter-spacing:0.05em;">843-732-4338</p>
+        <p>Best for emergencies — we pick up fast</p>
+      </a>
+      <a class="book-option" href="mailto:myrtlebeachautorescue@gmail.com">
+        <div class="opt-icon">✉️</div>
+        <h3>Email Us</h3>
+        <p style="word-break:break-word;">MyrtleBeachAutoRescue<br>@gmail.com</p>
+        <p>We'll respond quickly</p>
+      </a>
+    </div>
+
+    <!-- Calendly inline embed -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <div class="calendly-inline-widget" data-url="https://calendly.com/myrtlebeachautorescue?hide_gdpr_banner=1&background_color=0d1d38&text_color=ffffff&primary_color=00d45a" style="min-width:280px;height:700px;border-radius:12px;overflow:hidden;"></div>
+    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  </div>
+</div>
+
+<!-- CONTACT STRIP -->
+<div class="contact-strip">
+  <div class="contact-inner">
+    <div class="contact-item">
+      <div class="contact-item-icon">📞</div>
+      <div class="contact-item-text">
+        <div class="label">Phone / Text</div>
+        <a href="tel:8437324338">843-732-4338</a>
+      </div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-item-icon">✉️</div>
+      <div class="contact-item-text">
+        <div class="label">Email</div>
+        <a href="mailto:myrtlebeachautorescue@gmail.com">MyrtleBeachAutoRescue@gmail.com</a>
+      </div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-item-icon">📍</div>
+      <div class="contact-item-text">
+        <div class="label">Service Area</div>
+        <p>Myrtle Beach, SC & Surrounding Areas</p>
+      </div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-item-icon">🕐</div>
+      <div class="contact-item-text">
+        <div class="label">Hours</div>
+        <p>Always Open — 24/7</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CHAT WIDGET ── -->
+<style>
+  #chat-bubble {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+    font-family: 'Barlow', sans-serif;
+  }
+
+  #chat-toggle {
+    width: 60px;
+    height: 60px;
+    background: var(--green);
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 24px rgba(0,212,90,0.45);
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+
+  #chat-toggle:hover {
+    background: var(--green-dark);
+    transform: scale(1.08);
+  }
+
+  #chat-toggle svg { transition: all 0.2s; }
+
+  #chat-notification {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 18px;
+    height: 18px;
+    background: #ff4444;
+    border-radius: 50%;
+    border: 2px solid var(--navy);
+    font-size: 10px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+  }
+
+  #chat-window {
+    width: 360px;
+    height: 520px;
+    background: #0d1d38;
+    border: 1px solid rgba(0,212,90,0.2);
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: scale(0.8) translateY(20px);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-origin: bottom right;
+  }
+
+  #chat-window.open {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  #chat-header {
+    background: linear-gradient(135deg, #0a1f40, #0e2a50);
+    border-bottom: 1px solid rgba(0,212,90,0.15);
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  #chat-header-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--green);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 18px;
+  }
+
+  #chat-header-info { flex: 1; }
+
+  #chat-header-info strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 0.02em;
+  }
+
+  #chat-header-info span {
+    font-size: 11px;
+    color: var(--green);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  #chat-header-info span::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--green);
+    border-radius: 50%;
+    display: inline-block;
+    animation: blink 1.5s ease-in-out infinite;
+  }
+
+  #chat-close {
+    background: none;
+    border: none;
+    color: var(--gray);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 6px;
+    transition: color 0.2s;
+    display: flex;
+  }
+
+  #chat-close:hover { color: white; }
+
+  #chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    scroll-behavior: smooth;
+  }
+
+  #chat-messages::-webkit-scrollbar { width: 4px; }
+  #chat-messages::-webkit-scrollbar-track { background: transparent; }
+  #chat-messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+  .chat-msg {
+    display: flex;
+    gap: 8px;
+    animation: msgIn 0.2s ease;
+  }
+
+  @keyframes msgIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .chat-msg.user { flex-direction: row-reverse; }
+
+  .msg-bubble {
+    max-width: 78%;
+    padding: 10px 14px;
+    border-radius: 14px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .chat-msg.bot .msg-bubble {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: #e8eef8;
+    border-bottom-left-radius: 4px;
+  }
+
+  .chat-msg.user .msg-bubble {
+    background: var(--green);
+    color: #08122a;
+    font-weight: 500;
+    border-bottom-right-radius: 4px;
+  }
+
+  .msg-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .chat-msg.user .msg-avatar {
+    background: rgba(255,255,255,0.1);
+  }
+
+  .typing-indicator {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    padding: 12px 14px;
+  }
+
+  .typing-dot {
+    width: 7px;
+    height: 7px;
+    background: var(--gray);
+    border-radius: 50%;
+    animation: typingBounce 1.2s ease-in-out infinite;
+  }
+
+  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes typingBounce {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30% { transform: translateY(-6px); opacity: 1; }
+  }
+
+  #chat-quick-replies {
+    padding: 0 16px 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .quick-reply {
+    background: rgba(0,212,90,0.08);
+    border: 1px solid rgba(0,212,90,0.25);
+    color: var(--green);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+    font-family: 'Barlow', sans-serif;
+  }
+
+  .quick-reply:hover {
+    background: rgba(0,212,90,0.18);
+    border-color: var(--green);
+  }
+
+  #chat-input-row {
+    padding: 12px 16px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    background: rgba(0,0,0,0.2);
+  }
+
+  #chat-input {
+    flex: 1;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 10px 14px;
+    color: white;
+    font-size: 14px;
+    font-family: 'Barlow', sans-serif;
+    outline: none;
+    transition: border-color 0.2s;
+    resize: none;
+  }
+
+  #chat-input:focus { border-color: rgba(0,212,90,0.4); }
+  #chat-input::placeholder { color: rgba(255,255,255,0.3); }
+
+  #chat-send {
+    width: 38px;
+    height: 38px;
+    background: var(--green);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    flex-shrink: 0;
+  }
+
+  #chat-send:hover { background: var(--green-dark); }
+  #chat-send:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  #chat-footer-note {
+    text-align: center;
+    font-size: 10px;
+    color: rgba(255,255,255,0.2);
+    padding: 0 16px 10px;
+    letter-spacing: 0.03em;
+  }
+
+  @media (max-width: 400px) {
+    #chat-window { width: calc(100vw - 32px); }
+    #chat-bubble { right: 16px; bottom: 16px; }
+  }
+</style>
+
+<div id="chat-bubble">
+  <div id="chat-window">
+    <!-- Header -->
+    <div id="chat-header">
+      <div id="chat-header-icon">🚗</div>
+      <div id="chat-header-info">
+        <strong>Myrtle Beach Auto Rescue</strong>
+        <span>Online now — Fast Help. Local Care.</span>
+      </div>
+      <button id="chat-close" onclick="toggleChat()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <!-- Messages -->
+    <div id="chat-messages">
+      <div class="chat-msg bot">
+        <div class="msg-avatar">🚗</div>
+        <div class="msg-bubble">Hey there! 👋 I'm the MBAR assistant. I can help with questions about our services, pricing, or get you booked in. What can I help you with?</div>
+      </div>
+    </div>
+
+    <!-- Quick replies -->
+    <div id="chat-quick-replies">
+      <button class="quick-reply" onclick="sendQuick('What services do you offer?')">Services</button>
+      <button class="quick-reply" onclick="sendQuick('How do I book an appointment?')">Book Now</button>
+      <button class="quick-reply" onclick="sendQuick('Do you work on European cars?')">European Cars</button>
+      <button class="quick-reply" onclick="sendQuick('What are your prices?')">Pricing</button>
+    </div>
+
+    <!-- Input -->
+    <div id="chat-input-row">
+      <input id="chat-input" type="text" placeholder="Ask anything..." autocomplete="off" />
+      <button id="chat-send" onclick="sendMessage()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#08122a" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
+    <div id="chat-footer-note">Powered by AI · For emergencies call 843-732-4338</div>
+  </div>
+
+  <!-- Toggle button -->
+  <button id="chat-toggle" onclick="toggleChat()" aria-label="Open chat">
+    <span id="chat-notification">1</span>
+    <svg id="icon-chat" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#08122a" stroke-width="2.2">
+      <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+    </svg>
+    <svg id="icon-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#08122a" stroke-width="2.5" style="display:none">
+      <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+  </button>
+</div>
+
+<script>
+  let chatOpen = false;
+  let messages = [];
+  let isTyping = false;
+
+  function toggleChat() {
+    chatOpen = !chatOpen;
+    document.getElementById('chat-window').classList.toggle('open', chatOpen);
+    document.getElementById('icon-chat').style.display = chatOpen ? 'none' : 'block';
+    document.getElementById('icon-close').style.display = chatOpen ? 'block' : 'none';
+    document.getElementById('chat-notification').style.display = 'none';
+    if (chatOpen) document.getElementById('chat-input').focus();
+  }
+
+  function sendQuick(text) {
+    document.getElementById('chat-input').value = text;
+    sendMessage();
+    document.getElementById('chat-quick-replies').style.display = 'none';
+  }
+
+  document.getElementById('chat-input').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+
+  async function sendMessage() {
+    const input = document.getElementById('chat-input');
+    const text = input.value.trim();
+    if (!text || isTyping) return;
+
+    input.value = '';
+    isTyping = true;
+    document.getElementById('chat-send').disabled = true;
+
+    // Add user message
+    messages.push({ role: 'user', content: text });
+    appendMessage('user', text);
+
+    // Show typing indicator
+    const typingEl = appendTyping();
+
+    try {
+      const res = await fetch('/.netlify/functions/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages })
+      });
+
+      const data = await res.json();
+      typingEl.remove();
+
+      const reply = data.reply || "Sorry, I had trouble with that. Please call us at 843-732-4338!";
+      messages.push({ role: 'assistant', content: reply });
+      appendMessage('bot', reply);
+
+    } catch (err) {
+      typingEl.remove();
+      appendMessage('bot', "Sorry, I'm having connection issues. Please call or text us at 843-732-4338 — we're available 24/7!");
+    }
+
+    isTyping = false;
+    document.getElementById('chat-send').disabled = false;
+    document.getElementById('chat-input').focus();
+  }
+
+  function appendMessage(role, text) {
+    const msgs = document.getElementById('chat-messages');
+    const div = document.createElement('div');
+    div.className = `chat-msg ${role}`;
+
+    const avatar = document.createElement('div');
+    avatar.className = 'msg-avatar';
+    avatar.textContent = role === 'bot' ? '🚗' : '👤';
+
+    const bubble = document.createElement('div');
+    bubble.className = 'msg-bubble';
+    bubble.textContent = text;
+
+    div.appendChild(avatar);
+    div.appendChild(bubble);
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+    return div;
+  }
+
+  function appendTyping() {
+    const msgs = document.getElementById('chat-messages');
+    const div = document.createElement('div');
+    div.className = 'chat-msg bot';
+    div.innerHTML = `
+      <div class="msg-avatar">🚗</div>
+      <div class="msg-bubble">
+        <div class="typing-indicator">
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+        </div>
+      </div>`;
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+    return div;
+  }
+</script>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Myrtle Beach Auto Rescue. All rights reserved. &nbsp;|&nbsp; Myrtle Beach, SC &nbsp;|&nbsp; <a href="https://www.facebook.com/profile.php?id=61582792111011" target="_blank">Facebook</a></p>
+</footer>
+
+</body>
+</html>
