@@ -33,12 +33,15 @@
     font-family: 'Barlow', sans-serif;
     font-size: 16px;
     line-height: 1.6;
-    overflow-x: hidden;
   }
 
-  /* ── NOISE TEXTURE OVERLAY ── */
-  body::before {
-    content: '';
+  .page-wrapper {
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY (as real element, not pseudo - iOS fix) ── */
+  .noise-overlay {
     position: fixed;
     inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
@@ -749,6 +752,7 @@
 </style>
 </head>
 <body>
+<div class="page-wrapper">
 
 <!-- TOP BAR -->
 <header class="topbar">
@@ -1488,6 +1492,8 @@
 <footer>
   <p>© 2025 Myrtle Beach Auto Rescue. All rights reserved. &nbsp;|&nbsp; Myrtle Beach, SC &nbsp;|&nbsp; <a href="https://www.facebook.com/profile.php?id=61582792111011" target="_blank">Facebook</a></p>
 </footer>
+
+</div><!-- end page-wrapper -->
 
 </body>
 </html>
